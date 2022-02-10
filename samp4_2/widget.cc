@@ -116,5 +116,5 @@ void Widget::IniHash() {
               "size",     "indexOf", "lastIndexOf", "endsWith", "startsWith",
               "contains", "isNull",  "isEmpty"};
 
-  for (int i = 0; i != str_list.count(); ++i) hash.insert(str_list[i], i);
+  for (int i = 0; i != str_list.count(); ++i) hash.insert(str_list.at(i), i);
 }
