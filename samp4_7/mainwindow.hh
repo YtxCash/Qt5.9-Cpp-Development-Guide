@@ -28,8 +28,6 @@ class MainWindow : public QMainWindow {
 
   void on_actClear_triggered();
 
-  void on_chkBox_stateChanged(int arg1);
-
   void on_actSelectAll_triggered();
 
   void on_actSeletcNon_triggered();
@@ -40,6 +38,8 @@ class MainWindow : public QMainWindow {
 
   void on_listWidget_currentItemChanged(QListWidgetItem *current,
                                         QListWidgetItem *previous);
+
+  void on_chkBox_toggled(bool checked);
 
  private:
   Ui::MainWindow *ui;

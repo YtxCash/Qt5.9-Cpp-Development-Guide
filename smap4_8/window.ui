@@ -25,8 +25,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>826</width>
-         <height>546</height>
+         <width>659</width>
+         <height>540</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -70,7 +70,7 @@
       <widget class="QTreeWidget" name="treeWidget">
        <column>
         <property name="text">
-         <string notr="true">1</string>
+         <string>New Column</string>
         </property>
        </column>
       </widget>
@@ -88,10 +88,10 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actAddFolder"/>
-   <addaction name="actAddFiles"/>
-   <addaction name="actDeleteItem"/>
-   <addaction name="actScanItems"/>
+   <addaction name="actAddGroup"/>
+   <addaction name="actAddImages"/>
+   <addaction name="actDeleteImage"/>
+   <addaction name="actScanImages"/>
    <addaction name="actZoomOut"/>
    <addaction name="actZoomIn"/>
    <addaction name="actZoomRealSize"/>
@@ -101,14 +101,14 @@
    <addaction name="actDockVisible"/>
    <addaction name="actQuit"/>
   </widget>
-  <action name="actAddFolder">
+  <action name="actAddGroup">
    <property name="text">
-    <string>AddFolder</string>
+    <string>AddGroup</string>
    </property>
   </action>
-  <action name="actAddFiles">
+  <action name="actAddImages">
    <property name="text">
-    <string>AddFiles</string>
+    <string>AddImages</string>
    </property>
   </action>
   <action name="actZoomIn">
@@ -131,9 +131,9 @@
     <string>ZoomFitW</string>
    </property>
   </action>
-  <action name="actDeleteItem">
+  <action name="actDeleteImage">
    <property name="text">
-    <string>DeleteItem</string>
+    <string>DeleteImage</string>
    </property>
   </action>
   <action name="actQuit">
@@ -146,9 +146,9 @@
     <string>ZoomFitH</string>
    </property>
   </action>
-  <action name="actScanItems">
+  <action name="actScanImages">
    <property name="text">
-    <string>ScanItems</string>
+    <string>ScanImages</string>
    </property>
   </action>
   <action name="actDockVisible">

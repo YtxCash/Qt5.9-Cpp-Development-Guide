@@ -108,23 +108,6 @@ void MainWindow::on_actClear_triggered() {
   }
 }
 
-void MainWindow::on_chkBox_stateChanged(int arg1) {
-  Q_UNUSED(arg1);
-
-  bool check = ui->chkBox->isChecked();
-  if (check) {
-    for (int i = 0; i != ui->listWidget->count(); ++i) {
-      ui->listWidget->item(i)->setFlags(
-          Qt::ItemIsEditable | Qt::ItemIsSelectable | Qt::ItemIsEnabled |
-          Qt::ItemIsUserCheckable);
-    }
-  } else
-    for (int i = 0; i != ui->listWidget->count(); ++i) {
-      ui->listWidget->item(i)->setFlags(
-          Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
-    }
-}
-
 void MainWindow::on_actSelectAll_triggered() {
   bool check = ui->chkBox->isChecked();
   if (check) {
@@ -164,4 +147,18 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current,
       str = "Previous " + previous->text() + " " + "current " + current->text();
   }
   ui->lineEdit->setText(str);
+}
+
+void MainWindow::on_chkBox_toggled(bool checked) {
+  if (checked) {
+    for (int i = 0; i != ui->listWidget->count(); ++i) {
+      ui->listWidget->item(i)->setFlags(
+          Qt::ItemIsEditable | Qt::ItemIsSelectable | Qt::ItemIsEnabled |
+          Qt::ItemIsUserCheckable);
+    }
+  } else
+    for (int i = 0; i != ui->listWidget->count(); ++i) {
+      ui->listWidget->item(i)->setFlags(
+          Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
+    }
 }

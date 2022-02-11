@@ -8,7 +8,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
@@ -55,3 +55,4 @@ set_target_properties(smap4_8 PROPERTIES
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(smap4_8)
 endif()
+
