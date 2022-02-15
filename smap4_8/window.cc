@@ -35,6 +35,8 @@ void Window::IniTree() {
 }
 
 void Window::on_actAddGroup_triggered() {
+  if (ui->treeWidget->currentItem() == NULL) return;
+
   QString dir = QFileDialog::getExistingDirectory();
 
   if (!dir.isEmpty()) {
