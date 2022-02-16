@@ -13,7 +13,7 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget) {
 Widget::~Widget() { delete ui; }
 
 void Widget::on_btnCal_clicked() {
-  QString str = ui->editNum->text();
+  auto str = ui->editNum->text();
   int num = str.toInt();
   str = ui->editPrice->text();
   float price = str.toFloat();
@@ -23,9 +23,9 @@ void Widget::on_btnCal_clicked() {
 }
 
 void Widget::on_convert_clicked() {
-  QPushButton *sendBtn = qobject_cast<QPushButton *>(sender());
+  auto *sendBtn = qobject_cast<QPushButton *>(sender());
+  auto input_int = 0;
 
-  int input_int = 0;
   QString str;
   bool ok;
 

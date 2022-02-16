@@ -25,20 +25,20 @@ void Window::on_btnResetList_clicked() {
 
 void Window::on_btnAddItem_clicked() {
   mode->insertRow(mode->rowCount());
-  QModelIndex index = mode->index(mode->rowCount() - 1, 0);
+  auto index = mode->index(mode->rowCount() - 1, 0);
   mode->setData(index, "add item", Qt::DisplayRole);
   ui->listView->setCurrentIndex(index);
 }
 
 void Window::on_btnInsertItem_clicked() {
-  QModelIndex index = ui->listView->currentIndex();
+  auto index = ui->listView->currentIndex();
   mode->insertRow(index.row());
   mode->setData(index, "Insert item", Qt::DisplayRole);
   ui->listView->setCurrentIndex(index);
 }
 
 void Window::on_btnDeleteCurItem_clicked() {
-  QModelIndex index = ui->listView->currentIndex();
+  auto index = ui->listView->currentIndex();
   mode->removeRow(index.row());
 }
 
@@ -50,7 +50,7 @@ void Window::on_btnCleanText_clicked() { ui->plainTextEdit->clear(); }
 
 void Window::on_btnShowModeString_clicked() {
   ui->plainTextEdit->clear();
-  QStringList str = mode->stringList();
+  auto str = mode->stringList();
   for (int i = 0; i != str.count(); ++i)
     ui->plainTextEdit->appendPlainText(str.at(i));
 }

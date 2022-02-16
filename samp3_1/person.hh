@@ -9,19 +9,19 @@ class Person : public QObject {
   Q_CLASSINFO("company", "UPC")
   Q_CLASSINFO("version", "1.0.0")
 
-  Q_PROPERTY(int age READ age WRITE setAge NOTIFY ageChanged)
+  Q_PROPERTY(int Age READ Age WRITE SetAge NOTIFY AgeChanged)
   Q_PROPERTY(int score MEMBER m_score)
   Q_PROPERTY(QString name MEMBER m_name)
 
  public:
   explicit Person(QString name, QObject *parent = nullptr);
 
-  int age();
-  void setAge(int value);
-  void incAge();
+  int Age();
+  void SetAge(int value);
+  void IncAge();
 
  signals:
-  void ageChanged(int value);
+  void AgeChanged(int value);
 
  private:
   int m_age = 10;

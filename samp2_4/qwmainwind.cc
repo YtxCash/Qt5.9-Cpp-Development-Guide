@@ -14,39 +14,39 @@ QWMainWind::QWMainWind(QWidget *parent)
 QWMainWind::~QWMainWind() { delete ui; }
 
 void QWMainWind::IniUi() {
-  labelStatusBar = new QLabel;
-  labelStatusBar->setText(tr("Current File"));
-  ui->statusbar->addWidget(labelStatusBar);
+  label_status_bar = new QLabel;
+  label_status_bar->setText(tr("Current File"));
+  ui->statusbar->addWidget(label_status_bar);
 
-  progressBar1 = new QProgressBar;
-  progressBar1->setMaximumWidth(200);
-  progressBar1->setRange(0, 500);
-  progressBar1->setValue(ui->textEdit->font().pointSize());
-  ui->statusbar->addWidget(progressBar1);
+  progress_bar = new QProgressBar;
+  progress_bar->setMaximumWidth(200);
+  progress_bar->setRange(0, 500);
+  progress_bar->setValue(ui->textEdit->font().pointSize());
+  ui->statusbar->addWidget(progress_bar);
 
-  spinFontSize = new QSpinBox;
-  spinFontSize->setRange(10, 50);
-  spinFontSize->setMinimumWidth(50);
-  spinFontSize->setValue(ui->textEdit->font().pointSize());
+  spin_font_size = new QSpinBox;
+  spin_font_size->setRange(10, 50);
+  spin_font_size->setMinimumWidth(50);
+  spin_font_size->setValue(ui->textEdit->font().pointSize());
   ui->toolBar->addWidget(new QLabel("Font Size"));
-  ui->toolBar->addWidget(spinFontSize);
+  ui->toolBar->addWidget(spin_font_size);
 
   ui->toolBar->addSeparator();
   ui->toolBar->addWidget(new QLabel(tr("Font")));
-  comboFont = new QFontComboBox;
-  comboFont->setMaximumWidth(150);
-  ui->toolBar->addWidget(comboFont);
+  combo_font = new QFontComboBox;
+  combo_font->setMaximumWidth(150);
+  ui->toolBar->addWidget(combo_font);
 }
 
 void QWMainWind::IniSignalSlots() {
-  connect(spinFontSize, &QSpinBox::valueChanged, this,
+  connect(spin_font_size, &QSpinBox::valueChanged, this,
           &QWMainWind::on_spinFontSize_valueCHanged);
-  connect(comboFont, &QFontComboBox::currentFontChanged, this,
+  connect(combo_font, &QFontComboBox::currentFontChanged, this,
           &QWMainWind::on_comboFont_currentFontChanged);
 }
 
 void QWMainWind::on_actionFontBold_triggered(bool checked) {
-  QTextCharFormat fmt = ui->textEdit->currentCharFormat();
+  auto fmt = ui->textEdit->currentCharFormat();
   if (checked)
     fmt.setFontWeight(QFont::Bold);
   else
@@ -56,7 +56,7 @@ void QWMainWind::on_actionFontBold_triggered(bool checked) {
 }
 
 void QWMainWind::on_actionFontItalic_triggered(bool checked) {
-  QTextCharFormat fmt = ui->textEdit->currentCharFormat();
+  auto fmt = ui->textEdit->currentCharFormat();
   if (checked)
     fmt.setFontItalic(checked);
   else
@@ -65,7 +65,7 @@ void QWMainWind::on_actionFontItalic_triggered(bool checked) {
 }
 
 void QWMainWind::on_actionFontUnder_triggered(bool checked) {
-  QTextCharFormat fmt = ui->textEdit->currentCharFormat();
+  auto fmt = ui->textEdit->currentCharFormat();
   if (checked)
     fmt.setFontUnderline(checked);
   else
@@ -81,19 +81,19 @@ void QWMainWind::on_textEdit_copyAvailable(bool b) {
 
 void QWMainWind::on_textEdit_currentCharFormatChanged(
     const QTextCharFormat &format) {
-  QTextCharFormat fmt = ui->textEdit->currentCharFormat();
+  auto fmt = ui->textEdit->currentCharFormat();
   ui->actionFontBold->setChecked(fmt.font().bold());
   ui->actionFontItalic->setChecked(fmt.fontItalic());
   ui->actionFontUnder->setChecked(fmt.fontUnderline());
-  spinFontSize->setValue(fmt.fontPointSize());
-  comboFont->setCurrentFont(ui->textEdit->currentFont());
+  spin_font_size->setValue(fmt.fontPointSize());
+  combo_font->setCurrentFont(ui->textEdit->currentFont());
 }
 
 void QWMainWind::on_spinFontSize_valueCHanged(int i) {
   QTextCharFormat fmt;
   fmt.setFontPointSize(i);
   ui->textEdit->mergeCurrentCharFormat(fmt);
-  progressBar1->setValue(i);
+  progress_bar->setValue(i);
 }
 
 void QWMainWind::on_comboFont_currentFontChanged(const QFont &font) {

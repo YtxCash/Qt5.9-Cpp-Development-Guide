@@ -12,7 +12,7 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget) {
 Widget::~Widget() { delete ui; }
 
 void Widget::on_btnCurrent_clicked() {
-  QDateTime current = QDateTime::currentDateTime();
+  auto current = QDateTime::currentDateTime();
   ui->timeEdit->setTime(current.time());
   ui->lineEditTime->setText(current.time().toString("hh:mm AP"));
   ui->dateEdit->setDate(current.date());
@@ -22,7 +22,7 @@ void Widget::on_btnCurrent_clicked() {
 }
 
 void Widget::on_btnTime_clicked() {
-  QString str = ui->lineEditTime->text();
+  auto str = ui->lineEditTime->text();
   str = str.trimmed();
   if (!str.isEmpty()) {
     QTime t = QTime::fromString(str, "hh:mm AP");
@@ -31,30 +31,30 @@ void Widget::on_btnTime_clicked() {
 }
 
 void Widget::on_btnDate_clicked() {
-  QString str = ui->lineEditDate->text();
+  auto str = ui->lineEditDate->text();
   str = str.trimmed();
   if (!str.isEmpty()) {
-    QDate d = QDate::fromString(str, "yyyy-MM-dd");
+    auto d = QDate::fromString(str, "yyyy-MM-dd");
     ui->dateEdit->setDate(d);
   }
 }
 
 void Widget::on_btnDateTime_clicked() {
-  QString str = ui->lineEditDateTime->text();
+  auto str = ui->lineEditDateTime->text();
   str = str.trimmed();
   if (!str.isEmpty()) {
-    QDateTime dt = QDateTime::fromString(str, "yyyy-MM-dd hh:mm:ss");
+    auto dt = QDateTime::fromString(str, "yyyy-MM-dd hh:mm:ss");
     ui->dateTimeEdit->setDateTime(dt);
   }
 }
 
 void Widget::on_calendarWidget_selectionChanged() {
-  QDate date = ui->calendarWidget->selectedDate();
+  auto date = ui->calendarWidget->selectedDate();
   ui->lineEditSeletedDate->setText(date.toString("yyyy-MM-dd"));
 }
 
 void Widget::on_timer_timeout() {
-  QTime curTime = QTime::currentTime();
+  auto curTime = QTime::currentTime();
   ui->lcdHour->display(curTime.hour());
   ui->lcdMin->display(curTime.minute());
   ui->lcdSec->display(curTime.second());
@@ -85,7 +85,7 @@ void Widget::on_btnStop_clicked() {
   int tmMsec = time_count.elapsed();
   int ms = tmMsec % 1000;
   int sec = tmMsec / 1000;
-  QString str = QString::asprintf("%d seconds, %d mseconds", sec, ms);
+  auto str = QString::asprintf("%d seconds, %d mseconds", sec, ms);
   ui->labelFlow->setText(str);
   ui->btnStart->setEnabled(true);
   ui->btnStop->setDisabled(true);

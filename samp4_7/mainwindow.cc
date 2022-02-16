@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::IniUi() {
-  QMenu *menu_list = new QMenu;
+  auto *menu_list = new QMenu;
   menu_list->addAction(ui->actSelectAll);
   menu_list->addAction(ui->actSeletcNon);
   menu_list->addAction(ui->actSelInvs);
@@ -24,7 +24,7 @@ void MainWindow::IniUi() {
   ui->tBtnSelItem->setDefaultAction(ui->actSelPopMenu);
   ui->tBtnSelItem->setMenu(menu_list);
 
-  QToolButton *tBtn = new QToolButton;
+  auto *tBtn = new QToolButton;
   tBtn->setPopupMode(QToolButton::InstantPopup);
   tBtn->setToolButtonStyle(Qt::ToolButtonStyle::ToolButtonTextUnderIcon);
   tBtn->setMenu(menu_list);
@@ -48,7 +48,7 @@ void MainWindow::IniUi() {
 
 void MainWindow::on_listWidget_customContextMenuRequested(const QPoint &pos) {
   Q_UNUSED(pos);
-  QMenu *menu = new QMenu(this);
+  auto *menu = new QMenu(this);
   menu->addAction(ui->acttIni);
   menu->addAction(ui->actClear);
   menu->addAction(ui->actItemInsert);
@@ -84,7 +84,7 @@ void MainWindow::on_acttIni_triggered() {
 void MainWindow::on_actItemInsert_triggered() {
   bool check = ui->chkBox->isChecked();
   if (check) {
-    QListWidgetItem *item = new QListWidgetItem("New Item");
+    auto *item = new QListWidgetItem("New Item");
     item->setCheckState(Qt::Checked);
     item->setFlags(Qt::ItemIsEditable | Qt::ItemIsSelectable |
                    Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
@@ -96,7 +96,7 @@ void MainWindow::on_actItemDelete_triggered() {
   bool check = ui->chkBox->isChecked();
   if (check) {
     int row = ui->listWidget->currentRow();
-    QListWidgetItem *item = ui->listWidget->takeItem(row);
+    auto *item = ui->listWidget->takeItem(row);
     delete item;
   }
 }
@@ -129,7 +129,7 @@ void MainWindow::on_actSelInvs_triggered() { QString str = "do not how to do"; }
 void MainWindow::on_actItemAppend_triggered() {
   bool check = ui->chkBox->isChecked();
   if (check) {
-    QListWidgetItem *item = new QListWidgetItem("New Item");
+    auto *item = new QListWidgetItem("New Item");
     item->setCheckState(Qt::Checked);
     item->setFlags(Qt::ItemIsEditable | Qt::ItemIsSelectable |
                    Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);

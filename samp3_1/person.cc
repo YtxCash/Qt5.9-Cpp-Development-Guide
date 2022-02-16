@@ -6,14 +6,14 @@ Person::Person(QString name, QObject *parent) : QObject(parent) {
   m_name = name;
 }
 
-int Person::age() { return m_age; }
+int Person::Age() { return m_age; }
 
-void Person::setAge(int value) {
+void Person::SetAge(int value) {
   m_age = value;
-  emit ageChanged(m_age);
+  emit AgeChanged(m_age);
 }
 
-void Person::incAge() {
+void Person::IncAge() {
   m_age++;
-  emit ageChanged(m_age);
+  emit AgeChanged(m_age);
 }

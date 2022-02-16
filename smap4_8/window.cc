@@ -24,7 +24,7 @@ void Window::IniTree() {
   ui->treeWidget->clear();
   ui->treeWidget->setColumnCount(2);
 
-  QTreeWidgetItem *item = new QTreeWidgetItem(Window::kRowTop);
+  auto *item = new QTreeWidgetItem(Window::kRowTop);
   item->setText(kColItem, "Image");
   item->setText(kColItemType, "Top");
   item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsUserCheckable |
@@ -37,18 +37,18 @@ void Window::IniTree() {
 void Window::on_actAddGroup_triggered() {
   if (ui->treeWidget->currentItem() == NULL) return;
 
-  QString dir = QFileDialog::getExistingDirectory();
+  auto dir = QFileDialog::getExistingDirectory();
 
   if (!dir.isEmpty()) {
-    QTreeWidgetItem *par_item = ui->treeWidget->currentItem();
+    auto *par_item = ui->treeWidget->currentItem();
     AddGroupItem(par_item, dir);
   }
 }
 
 void Window::AddGroupItem(QTreeWidgetItem *par_item, QString dir_name) {
-  QString node_text = GetGroupName(dir_name);
+  auto node_text = GetGroupName(dir_name);
 
-  QTreeWidgetItem *item = new QTreeWidgetItem(kRowGroup);
+  auto *item = new QTreeWidgetItem(kRowGroup);
   item->setText(kColItem, node_text);
   item->setText(kColItemType, "Group");
   item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsUserCheckable |
@@ -60,17 +60,17 @@ void Window::AddGroupItem(QTreeWidgetItem *par_item, QString dir_name) {
 QString Window::GetGroupName(const QString &full_path_name) {
   int cnt = full_path_name.length();
   int i = full_path_name.lastIndexOf("/");
-  QString str = full_path_name.right(cnt - i - 1);
+  auto str = full_path_name.right(cnt - i - 1);
   return str;
 }
 
 void Window::on_actAddImages_triggered() {
-  QStringList list_images = QFileDialog::getOpenFileNames(
+  auto list_images = QFileDialog::getOpenFileNames(
       this, "Select Images", "", "Images(*.jpg)  Images(*.png)");
   if (list_images.isEmpty()) return;
 
   QTreeWidgetItem *par_item;
-  QTreeWidgetItem *item = ui->treeWidget->currentItem();
+  auto *item = ui->treeWidget->currentItem();
 
   if (item->type() == kRowImage)
     par_item = item->parent();
@@ -78,14 +78,14 @@ void Window::on_actAddImages_triggered() {
     par_item = item;
 
   for (int i = 0; i != list_images.size(); ++i) {
-    QString image_name = list_images.at(i);
+    auto image_name = list_images.at(i);
     AddImageItem(par_item, image_name);
   }
 }
 
 void Window::AddImageItem(QTreeWidgetItem *par_item, QString file_name) {
-  QString note_text = GetGroupName(file_name);
-  QTreeWidgetItem *item = new QTreeWidgetItem(kRowImage);
+  auto note_text = GetGroupName(file_name);
+  auto *item = new QTreeWidgetItem(kRowImage);
 
   item->setText(kColItem, note_text);
   item->setText(kColItemType, "Image");
@@ -97,7 +97,7 @@ void Window::AddImageItem(QTreeWidgetItem *par_item, QString file_name) {
 }
 
 void Window::DisplayImage(QTreeWidgetItem *item) {
-  QString image_name = item->data(kColItem, Qt::UserRole).toString();
+  auto image_name = item->data(kColItem, Qt::UserRole).toString();
   lab_file_name->setText(image_name);
   cur_pixmap.load(image_name);
   on_actZoomFitH_triggered();
@@ -108,8 +108,7 @@ void Window::on_treeWidget_currentItemChanged(QTreeWidgetItem *current,
   Q_UNUSED(previous);
   if (current == NULL) return;
 
-  int var = current->type();
-  switch (var) {
+  switch (int var = current->type()) {
     case kRowTop:
       ui->actAddGroup->setEnabled(true);
       ui->actAddImages->setEnabled(true);
@@ -132,21 +131,21 @@ void Window::on_treeWidget_currentItemChanged(QTreeWidgetItem *current,
 }
 
 void Window::on_actDeleteImage_triggered() {
-  QTreeWidgetItem *item = ui->treeWidget->currentItem();
-  QTreeWidgetItem *par_item = item->parent();
+  auto *item = ui->treeWidget->currentItem();
+  auto *par_item = item->parent();
   par_item->removeChild(item);
   delete item;
 }
 
 void Window::on_actScanImages_triggered() {
   for (int i = 0; i != ui->treeWidget->topLevelItemCount(); ++i) {
-    QTreeWidgetItem *item = ui->treeWidget->topLevelItem(i);
+    auto *item = ui->treeWidget->topLevelItem(i);
     ChangeItemCaption(item);
   }
 }
 
 void Window::ChangeItemCaption(QTreeWidgetItem *item) {
-  QString str = "*" + item->text(kColItem);
+  auto str = "*" + item->text(kColItem);
   item->setText(kColItem, str);
 
   if (item->childCount() > 0)
@@ -159,7 +158,7 @@ void Window::on_actZoomFitH_triggered() {
   int h = ui->scrollArea->height();
   int real_h = cur_pixmap.height();
   pix_ratio = float(h) / real_h;
-  QPixmap pix = cur_pixmap.scaledToHeight(h / 2);
+  auto pix = cur_pixmap.scaledToHeight(h / 2);
   ui->label->setPixmap(pix);
 }
 
@@ -167,7 +166,7 @@ void Window::on_actZoomFitW_triggered() {
   int w = ui->scrollArea->width();
   int real_w = cur_pixmap.width();
   pix_ratio = float(w) / real_w;
-  QPixmap pix = cur_pixmap.scaledToWidth(w / 2);
+  auto pix = cur_pixmap.scaledToWidth(w / 2);
   ui->label->setPixmap(pix);
 }
 
@@ -180,7 +179,7 @@ void Window::on_actZoomIn_triggered() {
   pix_ratio = pix_ratio * 1.2;
   int w = pix_ratio * cur_pixmap.width();
   int h = pix_ratio * cur_pixmap.height();
-  QPixmap pix = cur_pixmap.scaled(w, h);
+  auto pix = cur_pixmap.scaled(w, h);
   ui->label->setPixmap(pix);
 }
 
@@ -200,7 +199,7 @@ void Window::on_actZoomOut_triggered() {
   pix_ratio = pix_ratio / 1.2;
   int w = cur_pixmap.width() * pix_ratio;
   int h = cur_pixmap.height() * pix_ratio;
-  QPixmap pix = cur_pixmap.scaled(w, h);
+  auto pix = cur_pixmap.scaled(w, h);
   ui->label->setPixmap(pix);
 }
 

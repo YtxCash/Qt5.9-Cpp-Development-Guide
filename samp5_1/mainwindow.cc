@@ -25,7 +25,7 @@ void MainWindow::IniUi() {
   connect(ui->treeView, &QAbstractItemView::clicked, ui->listView,
           &QAbstractItemView::setRootIndex);
 
-  ui->chkkIsDir->setText("")
+  ui->chkkIsDir->setText("");
 }
 
 void MainWindow::on_treeView_clicked(const QModelIndex &index) {

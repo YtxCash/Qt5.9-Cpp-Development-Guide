@@ -36,11 +36,11 @@ void Widget::on_btnIniCities_clicked() {
 void Widget::on_btnCleanText_clicked() { ui->plainTextEdit->clear(); }
 
 void Widget::on_btnAddText_clicked() {
-  QTextDocument *doc = ui->plainTextEdit->document();
+  auto *doc = ui->plainTextEdit->document();
   int count = doc->blockCount();
   for (int i = 0; i != count; ++i) {
-    QTextBlock text = doc->findBlockByNumber(i);
-    QString str = text.text();
+    auto text = doc->findBlockByNumber(i);
+    auto str = text.text();
     ui->comboSimplify->addItem(str);
   }
 }

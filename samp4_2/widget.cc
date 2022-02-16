@@ -16,8 +16,8 @@ void Widget::on_btn_clicked() {
   btnClicked = qobject_cast<QPushButton *>(sender());
 
   QString str3;
-  QString str1 = ui->comboBox->currentText();
-  QString str2 = ui->comboBox_2->currentText();
+  auto str1 = ui->comboBox->currentText();
+  auto str2 = ui->comboBox_2->currentText();
 
   switch (hash[btnClicked->text()]) {
     case 0:

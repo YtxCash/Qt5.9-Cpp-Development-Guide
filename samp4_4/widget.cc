@@ -16,7 +16,7 @@ void Widget::on_sliderColor_valueChanged(int value) {
   QColor color(ui->sliderRed->value(), ui->sliderGreen->value(),
                ui->sliderBLue->value(), ui->sliderAlpha->value());
 
-  QPalette pale = ui->textEdit->palette();
+  auto pale = ui->textEdit->palette();
   pale.setColor(QPalette::Base, color);
   ui->textEdit->setPalette(pale);
 }
@@ -47,7 +47,7 @@ void Widget::IniDynaProp() {
 void Widget::on_dial_valueChanged(int value) { ui->lcdNumber->display(value); }
 
 void Widget::on_rBtnBin_clicked() {
-  QRadioButton *btn = qobject_cast<QRadioButton *>(sender());
+  auto *btn = qobject_cast<QRadioButton *>(sender());
   ui->lcdNumber->setDigitCount(10);
   switch (btn->property("Binary").toInt()) {
     case 2:

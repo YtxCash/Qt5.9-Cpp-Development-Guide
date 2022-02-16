@@ -42,9 +42,9 @@ class QWMainWind : public QMainWindow {
   void IniUi();
   void IniSignalSlots();
 
-  QLabel *labelStatusBar;
-  QProgressBar *progressBar1;
-  QSpinBox *spinFontSize;
-  QFontComboBox *comboFont;
+  QLabel *label_status_bar;
+  QProgressBar *progress_bar;
+  QSpinBox *spin_font_size;
+  QFontComboBox *combo_font;
 };
 #endif  // QWMAINWIND_HH

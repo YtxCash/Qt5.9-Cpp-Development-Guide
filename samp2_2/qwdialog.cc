@@ -5,31 +5,31 @@
 
 QWDialog::QWDialog(QWidget *parent) : QDialog(parent), ui(new Ui::QWDialog) {
   ui->setupUi(this);
-  connetSgSl();
+  IniSignalSlots();
 }
 
 QWDialog::~QWDialog() { delete ui; }
 
 void QWDialog::on_chkBoxUnder_clicked(bool checked) {
-  QFont font = ui->textEdit->font();
+  auto font = ui->textEdit->font();
   font.setUnderline(checked);
   ui->textEdit->setFont(font);
 }
 
 void QWDialog::on_chkBoxItalic_clicked(bool checked) {
-  QFont font = ui->textEdit->font();
+  auto font = ui->textEdit->font();
   font.setItalic(checked);
   ui->textEdit->setFont(font);
 }
 
 void QWDialog::on_chkBoxBold_clicked(bool checked) {
-  QFont font = ui->textEdit->font();
+  auto font = ui->textEdit->font();
   font.setBold(checked);
   ui->textEdit->setFont(font);
 }
 
-void QWDialog::setTextFontColor() {
-  QPalette palette = ui->textEdit->palette();
+void QWDialog::SetTextFontColor() {
+  auto palette = ui->textEdit->palette();
   if (ui->rBtnBlack->isChecked()) {
     palette.setColor(QPalette::Text, Qt::black);
   } else if (ui->rBtnBlue->isChecked()) {
@@ -40,11 +40,11 @@ void QWDialog::setTextFontColor() {
   ui->textEdit->setPalette(palette);
 }
 
-void QWDialog::connetSgSl() {
+void QWDialog::IniSignalSlots() {
   connect(ui->rBtnBlack, &QRadioButton::clicked, this,
-          &QWDialog::setTextFontColor);
+          &QWDialog::SetTextFontColor);
   connect(ui->rBtnRed, &QRadioButton::clicked, this,
-          &QWDialog::setTextFontColor);
+          &QWDialog::SetTextFontColor);
   connect(ui->rBtnBlue, &QRadioButton::clicked, this,
-          &QWDialog::setTextFontColor);
+          &QWDialog::SetTextFontColor);
 }

@@ -99,7 +99,7 @@ void Window::on_tableWidget_currentCellChanged(int currentRow,
   Q_UNUSED(previousColumn);
   Q_UNUSED(previousRow);
 
-  QTableWidgetItem *item = ui->tableWidget->item(currentRow, currentColumn);
+  auto *item = ui->tableWidget->item(currentRow, currentColumn);
 
   if (item == NULL) return;
   lab_cell_index->setText(

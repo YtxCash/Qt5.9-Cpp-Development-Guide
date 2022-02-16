@@ -23,11 +23,11 @@ class QWDialog : public QDialog {
 
   void on_chkBoxBold_clicked(bool checked);
 
-  void setTextFontColor();
+  void SetTextFontColor();
 
  private:
   Ui::QWDialog *ui;
 
-  void connetSgSl();
+  void IniSignalSlots();
 };
 #endif  // QWDIALOG_HH
