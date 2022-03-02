@@ -65,17 +65,23 @@ void Window::IniUi() {
   ui->statusbar->addWidget(lab_cur_file);
   ui->statusbar->addWidget(lab_cell_pos);
   ui->statusbar->addWidget(lab_cell_text);
+
+  ui->actFontBlod->setCheckable(true);
 }
 
 void Window::onCurrentChanged(const QModelIndex &current,
                               const QModelIndex &previous) {
   Q_UNUSED(previous);
 
-  if (current.isValid())
+  if (current.isValid()) {
     lab_cell_pos->setText(QString::asprintf(
-        "current cell: %d %d", current.row() + 1, current.column() + 1));
-  item = model_data->itemFromIndex(current);
-  lab_cell_text->setText("cell content " + item->text());
+        "cell Row: %d Column: %d", current.row() + 1, current.column() + 1));
+    item = model_data->itemFromIndex(current);
+    lab_cell_text->setText("content " + item->text());
+
+    QFont font = item->font();
+    ui->actFontBlod->setChecked(font.bold());
+  }
 }
 
 void Window::on_actOpen_triggered() {
@@ -191,7 +197,6 @@ void Window::on_actAlignCenter_triggered() {
   }
 }
 
-#if 0
 void Window::on_actFontBlod_triggered(bool checked) {
   if (!model_select->hasSelection()) return;
 
@@ -205,4 +210,46 @@ void Window::on_actFontBlod_triggered(bool checked) {
     item->setFont(font);
   }
 }
-#endif
+
+void Window::on_actSave_triggered() {
+  QString cur_path = QCoreApplication::applicationDirPath();
+  QString file_name = QFileDialog::getSaveFileName(this, "Select a file",
+                                                   cur_path, "All file (*.*)");
+  if (file_name.isEmpty()) return;
+
+  QFile open_file(file_name);
+  if (!(open_file.open(QIODevice::ReadWrite | QIODevice::Text |
+                       QIODevice::Truncate)))
+    return;
+
+  QTextStream stream(&open_file);
+  QString str{""};
+  int i = 0;
+  int j = 0;
+
+  ui->plainTextEdit->clear();
+
+  for (i = 0; i != model_data->columnCount(); ++i) {
+    item = model_data->horizontalHeaderItem(i);
+    str = str + item->text() + "\t\t";
+  }
+  stream << str << "\n";
+  ui->plainTextEdit->appendPlainText(str);
+
+  for (i = 0; i != model_data->rowCount(); ++i) {
+    str = "";
+    for (j = 0; j != model_data->columnCount() - 1; ++j) {
+      item = model_data->item(i, j);
+      str = str + item->text() + QString::asprintf("\t\t");
+    }
+
+    item = model_data->item(i, j);
+    if (item->checkState() == Qt::Checked)
+      str = str + "1";
+    else
+      str = str + "0";
+
+    ui->plainTextEdit->appendPlainText(str);
+    stream << str << "\n";
+  }
+}

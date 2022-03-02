@@ -48,5 +48,7 @@ class Window : public QMainWindow {
   void on_actAlignRight_triggered();
   void on_actAlignLeft_triggered();
   void on_actAlignCenter_triggered();
+  void on_actFontBlod_triggered(bool checked);
+  void on_actSave_triggered();
 };
 #endif  // WINDOW_HH
